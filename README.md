@@ -13,7 +13,7 @@ The public API consists of the following classes and interface:
 - `MessageHandler`: interface that determines how the server should respond to a request message with a response
   message.
 
-## Internal classes
+## Internal
 
 The internal classes are used by the public API. They include:
 
