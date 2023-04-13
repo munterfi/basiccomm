@@ -2,17 +2,17 @@ package ch.munterfi.basiccomm;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.concurrent.CompletableFuture;
 
 public class Server {
     private final int port;
-    private final MessageHandler handler;
+    private final MessageHandler messageHandler;
     private ServerSocket serverSocket;
     private Thread serverThread;
 
-    public Server(int port, MessageHandler handler) {
+    public Server(int port, MessageHandler messageHandler) {
         this.port = port;
-        this.handler = handler;
+        this.messageHandler = messageHandler;
     }
 
     public void start() {
@@ -20,9 +20,9 @@ public class Server {
             serverSocket = new ServerSocket(port);
             serverThread = Thread.currentThread();
             while (!serverThread.isInterrupted()) {
-                Socket socket = serverSocket.accept();
-                Thread t = new Thread(new ClientHandler(socket, handler));
-                t.start();
+                var socket = serverSocket.accept();
+                var clientHandler = new ClientHandler(socket, messageHandler);
+                CompletableFuture.runAsync(clientHandler);
             }
         } catch (IOException e) {
             if (!serverThread.isInterrupted()) {
@@ -39,6 +39,5 @@ public class Server {
             throw new RuntimeException("Error while stopping server", e);
         }
     }
-
 }
 

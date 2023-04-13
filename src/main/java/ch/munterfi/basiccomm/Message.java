@@ -11,16 +11,16 @@ public record Message(byte[] data) {
     }
 
     public byte[] toByteArray() {
-        ByteBuffer bb = ByteBuffer.allocate(getSize());
+        var bb = ByteBuffer.allocate(getSize());
         bb.putInt(data.length);
         bb.put(data);
         return bb.array();
     }
 
     public static Message fromByteArray(byte[] bytes) {
-        ByteBuffer bb = ByteBuffer.wrap(bytes);
+        var bb = ByteBuffer.wrap(bytes);
         int size = bb.getInt();
-        byte[] data = new byte[size];
+        var data = new byte[size];
         bb.get(data);
         return new Message(data);
     }

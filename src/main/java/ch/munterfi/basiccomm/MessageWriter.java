@@ -13,7 +13,7 @@ class MessageWriter {
     }
 
     public void writeMessage(Message message) throws IOException {
-        byte[] bytes = message.toByteArray();
+        var bytes = message.toByteArray();
         os.writeInt(bytes.length);
         os.write(bytes);
         os.flush();

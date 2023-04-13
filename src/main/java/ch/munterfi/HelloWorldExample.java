@@ -10,14 +10,14 @@ import java.nio.charset.StandardCharsets;
 
 class HelloWorldMessageHandler implements MessageHandler {
     @Override
-    public Message handleMessage(Message message) {
-        String requestString = message.toString();
+    public Message apply(Message message) {
+        var requestString = message.toString();
         System.out.println("Service - Received request: " + requestString);
-        String responseString = "Unknown request!";
+        var responseString = "Unknown request!";
         if (requestString.equals("hello")) {
             responseString = "world";
         }
-        Message response = new Message(responseString.getBytes(StandardCharsets.UTF_8));
+        var response = new Message(responseString.getBytes(StandardCharsets.UTF_8));
         System.out.println("Service - Sending response: " + response);
         return response;
     }

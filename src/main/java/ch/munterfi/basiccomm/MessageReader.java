@@ -14,7 +14,7 @@ class MessageReader {
 
     public Message readMessage() throws IOException {
         int messageSize = is.readInt();
-        byte[] data = new byte[messageSize];
+        var data = new byte[messageSize];
         int totalRead = 0;
         while (totalRead < messageSize) {
             int read = is.read(data, totalRead, messageSize - totalRead);
