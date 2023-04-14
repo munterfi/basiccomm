@@ -13,9 +13,9 @@ class MessageWriter {
     }
 
     public void write(Message message) throws IOException {
-        var bytes = message.toByteArray();
-        os.writeInt(bytes.length);
-        os.write(bytes);
+        var data = message.data();
+        os.writeInt(data.length);
+        os.write(data);
         os.flush();
     }
 }

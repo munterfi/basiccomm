@@ -13,16 +13,16 @@ class MessageReader {
     }
 
     public Message read() throws IOException {
-        int messageSize = is.readInt();
-        var data = new byte[messageSize];
+        int payloadSize = is.readInt();
+        var data = new byte[payloadSize];
         int totalRead = 0;
-        while (totalRead < messageSize) {
-            int read = is.read(data, totalRead, messageSize - totalRead);
+        while (totalRead < payloadSize) {
+            int read = is.read(data, totalRead, payloadSize - totalRead);
             if (read == -1) {
                 throw new IOException("Unexpected end of stream");
             }
             totalRead += read;
         }
-        return Message.fromByteArray(data);
+        return new Message(data);
     }
 }
