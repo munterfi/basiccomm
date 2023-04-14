@@ -14,10 +14,10 @@ public class Client {
         this.port = port;
     }
 
-    public Message sendMessage(Message message) throws IOException {
+    public Message send(Message message) throws IOException {
         try (Socket socket = new Socket(host, port); InputStream is = socket.getInputStream(); OutputStream os = socket.getOutputStream()) {
-            new MessageWriter(os).writeMessage(message);
-            return new MessageReader(is).readMessage();
+            new MessageWriter(os).write(message);
+            return new MessageReader(is).read();
         }
     }
 }

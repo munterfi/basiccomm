@@ -42,7 +42,7 @@ public class HelloWorldExample {
         var client = new Client("localhost", port);
         System.out.println("Consumer - Sending request: " + requestText);
         var request = new Message(requestText.getBytes(StandardCharsets.UTF_8));
-        var response = client.sendMessage(request);
+        var response = client.send(request);
         System.out.println("Consumer - Received response: " + response.toString());
         return response;
     }

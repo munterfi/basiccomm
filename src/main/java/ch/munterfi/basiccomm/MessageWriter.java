@@ -12,7 +12,7 @@ class MessageWriter {
         this.os = new DataOutputStream(os);
     }
 
-    public void writeMessage(Message message) throws IOException {
+    public void write(Message message) throws IOException {
         var bytes = message.toByteArray();
         os.writeInt(bytes.length);
         os.write(bytes);

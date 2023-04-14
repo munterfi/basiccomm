@@ -17,9 +17,9 @@ class ClientHandler implements Runnable {
     @Override
     public void run() {
         try (InputStream is = socket.getInputStream(); OutputStream os = socket.getOutputStream()) {
-            var request = new MessageReader(is).readMessage();
+            var request = new MessageReader(is).read();
             var response = messageHandler.apply(request);
-            new MessageWriter(os).writeMessage(response);
+            new MessageWriter(os).write(response);
         } catch (IOException e) {
             throw new RuntimeException("Error while handling client", e);
         }

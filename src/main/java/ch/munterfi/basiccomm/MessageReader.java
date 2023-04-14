@@ -12,7 +12,7 @@ class MessageReader {
         this.is = new DataInputStream(is);
     }
 
-    public Message readMessage() throws IOException {
+    public Message read() throws IOException {
         int messageSize = is.readInt();
         var data = new byte[messageSize];
         int totalRead = 0;
